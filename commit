@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+git pull . && \
+rake && \
+rake git:add_untracked && \
+git commit -a && \
+git push && \
+git status
