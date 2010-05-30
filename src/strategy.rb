@@ -1,25 +1,28 @@
 class Strategy
   def decide(my_history, opponent_history)
-    raise "Override this method, please."
+    to_operate?(my_history, opponent_history) ? Action.cooperative : Action.treacherous
+  end
+  
+  def to_operate?(my_history, opponent_history)
+    raise "Override this method to implement your strategy."
   end
 end
 
 class AlwaysCooperateStrategy < Strategy
-  def decide(my_history, opponent_history)
-    Action.cooperative
+  def to_operate?(my_history, opponent_history)
+    true
   end
 end
 
 class AlwaysBetrayStrategy < Strategy
-  def decide(my_history, opponent_history)
-    Action.treacherous
+  def to_operate?(my_history, opponent_history)
+    false
   end
 end
 
 class TitForTatStrategy < Strategy
-  def decide(my_history, opponent_history)
+  def to_operate?(my_history, opponent_history)
     last_opponent_action = opponent_history.last
-    return Action.cooperative if last_opponent_action.nil? or last_opponent_action.cooperative?
-    return Action.treacherous
+    last_opponent_action.nil? or last_opponent_action.cooperative?
   end
 end
