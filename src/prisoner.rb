@@ -6,8 +6,8 @@ class Prisoner
     @score = 0
   end
   
-  def decide
-    @strategy.decide
+  def decide(my_history = [], opponent_history = [])
+    @strategy.decide(my_history, opponent_history)
   end
   
   def count!(my_action, opponent_action)
@@ -17,28 +17,5 @@ class Prisoner
       @score += 5 if opponent_action.cooperative?
       @score += 1 if opponent_action.treacherous?
     end
-  end
-end
-
-class Action
-  def self.cooperative
-    Action.new(true)
-  end
-  
-  def self.treacherous
-    Action.new(false)
-  end
-  
-  def cooperative?
-    @cooperative
-  end
-  
-  def treacherous?
-    not cooperative?
-  end
-  
-  private
-  def initialize(be_cooperative = true)
-    @cooperative = be_cooperative
   end
 end
