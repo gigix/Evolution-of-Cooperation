@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + "/spec_helper"
 describe Competition do
   describe :play! do
     it "plays Prisoners' Dilemma around given strategies given times" do
-      competition = Competition.new(10, TitForTatStrategy, AlwaysBetrayStrategy)
+      competition = Competition.new(10, [TitForTatStrategy, AlwaysBetrayStrategy])
       result = competition.play!
       
       result.should_not be_nil

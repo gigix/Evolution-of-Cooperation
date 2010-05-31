@@ -1,5 +1,5 @@
 class Competition
-  def initialize(times, *strategies)
+  def initialize(times, strategies)
     @times = times
     @strategies = strategies    
     @result = Result.new(@strategies)
@@ -31,11 +31,11 @@ class Result
     @result_hash[strategy]
   end
   
-  def sum(strategy)
+  def total(strategy)
     @result_hash[strategy].values.inject(0){|sum, score| sum + score}
   end
   
   def strategies
-    @result_hash.keys.sort{|strategy_1, strategy_2| sum(strategy_2) <=> sum(strategy_1)}
+    @result_hash.keys.sort{|strategy_1, strategy_2| total(strategy_2) <=> total(strategy_1)}
   end
 end

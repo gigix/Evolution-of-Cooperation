@@ -1,6 +1,8 @@
 require 'rake'
 require 'rake/testtask'
 
+require File.dirname(__FILE__) + "/boot"
+
 def exec(cmd)
   success = system(cmd)
   raise "System command execution failed!" unless success
@@ -12,4 +14,17 @@ task :default => [:spec]
 
 task :spec do
   exec "spec spec/"
+end
+
+task :competition do
+  competitors = [
+    AlwaysCooperateStrategy, 
+    AlwaysBetrayStrategy, 
+    TitForTatStrategy, 
+    NeverForgive,
+    RandomStrategy
+  ]
+  competition = Competition.new(100, competitors)
+  result = competition.play!
+  puts "Champion is #{result.strategies.first}, whose total score is #{result.total(result.strategies.first)}"
 end

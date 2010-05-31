@@ -1,0 +1,25 @@
+The book "The Evolution Of Cooperation":http://en.wikipedia.org/wiki/The_Evolution_of_Cooperation (by Robert Axelrod) was a great work. You should definitely "check it out":http://www.amazon.com/Evolution-Cooperation-Robert-Axelrod/dp/0465021212 . (And here is a "Chinese version":http://book.douban.com/subject/2259198/ )
+
+However, the software emulating its system was "implemented with Fortran":http://www.cscs.umich.edu/Software/CC/ECHome.html , and hardly readable. I want to rebuild it with "Ruby":http://www.ruby-lang.org and make it more readable, probably make it an online system and invite people all over the world to contribute their strategies. 
+
+== How to Participate? ==
+I'm doing it alone so far. You can help by both ways:
+
+=== Submit Strategies ===
+You can submit a strategy which would be used by a "prisoner" in "Iterated Prisoner's Dilemma":http://en.wikipedia.org/wiki/Prisoner%27s_Dilemma . In order to program a strategy, you need to:
+
+* Create a .rb file (e.g. _never_forgive.rb_) within "strategies" directory (or make a subdirectory for yourself, it's your call).
+* Define a class for your strategy, which must be a subclass of Strategy:
+<blockquote><pre>
+	class MyNiubiStrategy < Strategy
+		...
+	end
+</pre></blockquote>
+* Override/implement _to_operate?_ method, which has 2 arguments: the history of your actions and your opponent's. Based on the historical actions, you need to make a decision: am I going to cooperate in this round, or shall I defect/betray?
+** To those who don't know Ruby much: the value of last statement in a method would be returned. Return _false_ or _nil_ causes your prisoner to betray, otherwise he will cooperate.
+** Both arguments are arrays. For example, you could use _opponent_history.last_ to get the last step your opponent just behaved. "Check the document":http://www.ruby-doc.org/core/classes/Array.html for more detail.
+
+=== Contribute to the Platform ===
+(TBD)
+
+That's it. Read the book if you haven't.

@@ -1,7 +1,0 @@
-The book "The Evolution Of Cooperation" (by Robert Axelrod) was a great work. You should definitely check it out here:
-
-http://www.amazon.com/Evolution-Cooperation-Robert-Axelrod/dp/0465021212
-
-However, the software emulating its system was implemented with Fortran, and hardly readable. (See it at http://www.cscs.umich.edu/Software/CC/ECHome.html ) I want to rebuild it and make it more readable, probably make it an online system and invite people all over the world to contribute their strategies. 
-
-That's it. Read the book if you haven't.
