@@ -38,4 +38,12 @@ class Result
   def strategies
     @result_hash.keys.sort{|strategy_1, strategy_2| total(strategy_2) <=> total(strategy_1)}
   end
+  
+  def to_s
+    table = " , " + strategies.map{|strategy| strategy.to_s}.join(", ") + "\n"
+    strategies.each do |row_strategy|
+      table << row_strategy.to_s + ", " + strategies.map{|column_strategy| self[row_strategy][column_strategy].to_s}.join(", ") + "\n"
+    end
+    table
+  end
 end

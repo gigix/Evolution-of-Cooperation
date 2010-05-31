@@ -1,12 +1,12 @@
 ========= DONE =========
 Competition: play iterated dilemmas around multiple strategies and accumulate scores
 Load strategies from "strategies" subdirs
+Create a rake task to play competition
+Publish competition result as CSV file
 
 
 
 ========= DOING =========
-Create a rake task to play competition and publish result
-
 
 
 ========= TODO =========

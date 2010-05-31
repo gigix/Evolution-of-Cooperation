@@ -18,13 +18,18 @@ end
 
 task :competition do
   competitors = [
-    AlwaysCooperateStrategy, 
     AlwaysBetrayStrategy, 
     TitForTatStrategy, 
     NeverForgive,
     RandomStrategy
   ]
   competition = Competition.new(100, competitors)
+  
   result = competition.play!
-  puts "Champion is #{result.strategies.first}, whose total score is #{result.total(result.strategies.first)}"
+  puts "Champion is #{result.strategies.first}, whose total score is #{result.total(result.strategies.first)}."
+  
+  result_dir = File.dirname(__FILE__) + "/result"
+  mkdir_p result_dir
+  File.open("#{result_dir}/competition_result.csv", "w"){|f| f.write(result.to_s)}
+  puts "Check #{result_dir} directory for detailed report."
 end
