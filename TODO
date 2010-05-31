@@ -1,14 +1,14 @@
 ========= DONE =========
+Competition: play iterated dilemmas around multiple strategies and accumulate scores
 
 
 
 ========= DOING =========
+Load strategies from "strategies" subdirs
 
 
 
 ========= TODO =========
-Competition: play iterated dilemmas around multiple strategies and accumulate scores
-Load strategies from "strategies" subdirs
 Create a rake task to play competition and publish result
 
 (Simulate natural selection)
