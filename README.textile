@@ -22,17 +22,16 @@ end</pre></blockquote>
 * Override/implement _*to_operate?*_ method, which has 2 arguments: the history of your actions and your opponent's. Based on the historical actions, you need to make a decision: am I going to cooperate in this round, or shall I defect/betray?
 ** To those who don't know Ruby much: the value of last statement in a method would be returned. Return _*false*_ or _*nil*_ causes your prisoner to betray, otherwise he will cooperate.
 ** Both arguments are arrays. For example, you could use _*opponent_history.last*_ to get the last step your opponent just behaved. "Check the document":http://www.ruby-doc.org/core/classes/Array.html for more detail.
+** With each historical action step in any argument, you can call _*cooperative?*_ and _*treacherous?*_ methods to determine its attitude.
 * Add your new strategy into _*competition*_ task, which is in _*Rakefile*_.
-<blockquote><pre>
-  competitors = [
-    AlwaysCooperateStrategy, 
-    AlwaysBetrayStrategy, 
-    TitForTatStrategy, 
-    NeverForgive,
-	MyNiubiStrategy,
-    RandomStrategy
-  ]	
-</pre></blockquote>
+<blockquote><pre>competitors = [
+  AlwaysCooperateStrategy, 
+  AlwaysBetrayStrategy, 
+  TitForTatStrategy, 
+  NeverForgive,
+  MyNiubiStrategy,
+  RandomStrategy
+]</pre></blockquote>
 * Finally...invoke _*rake competition*_ in your console, and see if your strategy wins the championship.
 
 h3. Contribute to the Platform
