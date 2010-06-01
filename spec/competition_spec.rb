@@ -9,7 +9,9 @@ describe Competition do
       result.should_not be_nil
       result[TitForTatStrategy][AlwaysBetrayStrategy].should == 9
       result[AlwaysBetrayStrategy][TitForTatStrategy].should == 14
-      result.strategies.should == [AlwaysBetrayStrategy, TitForTatStrategy]
+      result[AlwaysBetrayStrategy][AlwaysBetrayStrategy].should == 10
+      result[TitForTatStrategy][TitForTatStrategy].should == 30
+      result.strategies.should == [TitForTatStrategy, AlwaysBetrayStrategy]
     end
   end
 end

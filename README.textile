@@ -2,7 +2,11 @@ The book "The Evolution Of Cooperation":http://en.wikipedia.org/wiki/The_Evoluti
 
 However, the software emulating its system was "implemented with Fortran":http://www.cscs.umich.edu/Software/CC/ECHome.html , and hardly readable. I want to rebuild it with "Ruby":http://www.ruby-lang.org and make it more readable, probably make it an online system and invite people all over the world to contribute their strategies. 
 
-h2. How to Participate?
+h2. What Is It, After All?
+
+I created a platform to simulate a series of "Iterated Prisoner's Dilemma":http://en.wikipedia.org/wiki/Prisoner%27s_Dilemma (which has also been referred to as the "Peace-War game") games. You can try to build a smartest strategy to win the championship of all the prisoners.
+
+h2. How Can I Participate?
 
 I'm doing it alone so far. You can help by both ways:
 

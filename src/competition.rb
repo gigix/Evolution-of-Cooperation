@@ -8,7 +8,7 @@ class Competition
   def play!
     @strategies.each_with_index do |row, row_index|
       @strategies.each_with_index do |column, column_index|
-        next if column_index <= row_index
+        next if column_index < row_index
         iterated_dilemma = IteratedDilemma.build(row, column, @times)
         score1, score2 = iterated_dilemma.play!
         @result[row][column] = score1
