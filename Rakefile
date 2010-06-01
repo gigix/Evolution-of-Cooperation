@@ -19,11 +19,14 @@ end
 task :competition do
   competitors = [
     AlwaysBetrayStrategy, 
+    AlwaysCooperateStrategy,
     TitForTatStrategy, 
     NeverForgive,
+    Joss,
+    TitForTwoTats,
     RandomStrategy
   ]
-  competition = Competition.new(100, competitors)
+  competition = Competition.new(200, competitors)
   
   result = competition.play!
   puts "Champion is #{result.strategies.first}, whose total score is #{result.total(result.strategies.first)}."

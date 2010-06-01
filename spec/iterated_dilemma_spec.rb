@@ -57,5 +57,22 @@ describe IteratedDilemma do
       iterated_dilemma.history(betrayer).should have(10).records
       10.times{|i| iterated_dilemma.history(betrayer)[i].should be_treacherous}
     end
+    
+    it "does not allow prisoner to change" do
+      class Cracker < Strategy
+        def to_operate?(my_history, opponent_history)
+          my_history.clear
+          opponent_history.clear
+        end
+      end
+      cooperator = Prisoner.new(AlwaysCooperateStrategy.new)
+      cracker = Prisoner.new(Cracker.new)
+      iterated_dilemma = IteratedDilemma.new(cooperator, cracker, 10)
+      
+      iterated_dilemma.play!
+      
+      iterated_dilemma.history(cooperator).should have(10).records
+      iterated_dilemma.history(cracker).should have(10).records
+    end
   end
 end
