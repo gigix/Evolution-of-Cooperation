@@ -1,6 +1,6 @@
 class IteratedDilemma
-  def self.build(strategy_class_1, strategy_class_2, times)
-    IteratedDilemma.new(Prisoner.new(strategy_class_1.new), Prisoner.new(strategy_class_2.new), times)
+  def self.build(strategy_1, strategy_2, times)
+    IteratedDilemma.new(Prisoner.new(strategy_1), Prisoner.new(strategy_2), times)
   end
   
   def initialize(prisoner_1, prisoner_2, times)

@@ -1,7 +1,9 @@
 class Competition
-  def initialize(times, strategies)
+  DEFAULT_TIMES = 200
+  
+  def initialize(strategies, times = DEFAULT_TIMES)
     @times = times
-    @strategies = strategies    
+    @strategies = strategies
     @result = Result.new(@strategies)
   end
   
@@ -21,22 +23,28 @@ end
 
 class Result
   def initialize(strategies)
-    @result_hash = {}
+    @result_rows = {}
     strategies.each do |strategy|
-      @result_hash[strategy] = {}
+      @result_rows[strategy] = {}
     end
   end
   
   def [](strategy)
-    @result_hash[strategy]
+    @result_rows[strategy]
   end
   
   def total(strategy)
-    @result_hash[strategy].values.inject(0){|sum, score| sum + score}
+    @result_rows[strategy].values.inject(0){|sum, score| sum + score}
   end
   
-  def strategies
-    @result_hash.keys.sort{|strategy_1, strategy_2| total(strategy_2) <=> total(strategy_1)}
+  def highest_score_of(strategy_class)
+    total(strategies.first)
+  end
+  
+  def strategies(of_class = nil)
+    candidates = @result_rows
+    candidates = @result_rows.keys.select{|strategy| strategy.class == of_class} if of_class
+    candidates.keys.sort{|strategy_1, strategy_2| total(strategy_2) <=> total(strategy_1)}
   end
   
   def to_s

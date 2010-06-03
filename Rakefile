@@ -10,7 +10,7 @@ end
 
 import File.expand_path(File.dirname(__FILE__) + "/lib/tasks/git.rake")
 
-task :default => [:spec]
+task :default => [:spec, :competition]
 
 task :spec do
   exec "spec spec/"
@@ -18,15 +18,15 @@ end
 
 task :competition do
   competitors = [
-    AlwaysBetrayStrategy, 
     AlwaysCooperateStrategy,
+    AlwaysBetrayStrategy, 
     TitForTatStrategy, 
-    NeverForgive,
-    Joss,
-    TitForTwoTats,
-    RandomStrategy
-  ]
-  competition = Competition.new(200, competitors)
+    # NeverForgive,
+    # Joss,
+    # TitForTwoTats,
+    # RandomStrategy
+  ].map{|clazz| clazz.new}
+  competition = Competition.new(competitors)
   
   result = competition.play!
   puts "Champion is #{result.strategies.first}, whose total score is #{result.total(result.strategies.first)}."

@@ -3,15 +3,41 @@ require File.dirname(__FILE__) + "/spec_helper"
 describe Competition do
   describe :play! do
     it "plays Prisoners' Dilemma around given strategies given times" do
-      competition = Competition.new(10, [TitForTatStrategy, AlwaysBetrayStrategy])
+      tit_for_tat = TitForTatStrategy.new
+      always_betray = AlwaysBetrayStrategy.new
+      competition = Competition.new([tit_for_tat, always_betray], 10)
       result = competition.play!
       
       result.should_not be_nil
-      result[TitForTatStrategy][AlwaysBetrayStrategy].should == 9
-      result[AlwaysBetrayStrategy][TitForTatStrategy].should == 14
-      result[AlwaysBetrayStrategy][AlwaysBetrayStrategy].should == 10
-      result[TitForTatStrategy][TitForTatStrategy].should == 30
-      result.strategies.should == [TitForTatStrategy, AlwaysBetrayStrategy]
+      result[tit_for_tat][always_betray].should == 9
+      result[always_betray][tit_for_tat].should == 14
+      result[always_betray][always_betray].should == 10
+      result[tit_for_tat][tit_for_tat].should == 30
+      result.strategies.should == [tit_for_tat, always_betray]
+    end
+    
+    it "supports multiple strategies of same class" do
+      competition = Competition.new([TitForTatStrategy.new, TitForTatStrategy.new], 10)
+      result = competition.play!
+      
+      result.strategies.should have(2).strategies
+    end
+  end
+end
+
+describe Result do
+  describe :highest_score_of do
+    it "returns highest total score within instances of given strategy class" do
+      strategy_1 = Strategy.new
+      strategy_2 = Strategy.new
+      result = Result.new([strategy_1, strategy_2])
+      
+      result[strategy_1][strategy_1] = 10
+      result[strategy_1][strategy_2] = 10
+      result[strategy_2][strategy_1] = 5
+      result[strategy_2][strategy_2] = 5
+      
+      result.highest_score_of(Strategy).should == 20
     end
   end
 end
