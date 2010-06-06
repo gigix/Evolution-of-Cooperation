@@ -38,13 +38,13 @@ class Result
   end
   
   def highest_score_of(strategy_class)
-    total(strategies.first)
+    total(strategies(strategy_class).first)
   end
   
   def strategies(of_class = nil)
-    candidates = @result_rows
+    candidates = @result_rows.keys
     candidates = @result_rows.keys.select{|strategy| strategy.class == of_class} if of_class
-    candidates.keys.sort{|strategy_1, strategy_2| total(strategy_2) <=> total(strategy_1)}
+    candidates.sort{|strategy_1, strategy_2| total(strategy_2) <=> total(strategy_1)}
   end
   
   def to_s

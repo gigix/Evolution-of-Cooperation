@@ -2,28 +2,29 @@ require File.dirname(__FILE__) + "/spec_helper"
 
 describe NatualSelection do
   before(:each) do
+    @amount_of_instances = 8
     @strategy_classes = [AlwaysCooperateStrategy, AlwaysBetrayStrategy, TitForTatStrategy, NeverForgive]
-    @natual_selection = NatualSelection.new(@strategy_classes)
+    @natual_selection = NatualSelection.new(@strategy_classes, @amount_of_instances)
   end
   
   describe :initialize do
     it "creates strategy instances evenly" do
       initial_strategies = @natual_selection.instance_variable_get("@strategies")
-      initial_strategies.should have(1000).instances
+      initial_strategies.should have(@amount_of_instances).instances
       @strategy_classes.each do |clazz|
-        initial_strategies.select{|strategy| strategy.class == clazz}.should have(250).instances
+        initial_strategies.select{|strategy| strategy.class == clazz}.should have(@amount_of_instances / @strategy_classes.size).instances
       end
     end 
   end
   
   describe :play! do
-    it "returns highest scores of given strategies"
-  #     natual_selection = NatualSelection.new([AlwaysCooperateStrategy, AlwaysBetrayStrategy, TitForTatStrategy])
-  #     result = natual_selection.play!
-  #     result[AlwaysCooperateStrategy].should == 1200
-  #     result[AlwaysBetrayStrategy].should == 1404
-  #     result[TitForTatStrategy].should == 1399
-  #   end
+    it "returns highest scores of given strategies" do
+      result = @natual_selection.play!
+      result[TitForTatStrategy].should == 3998
+      result[NeverForgive].should == 3998
+      result[AlwaysCooperateStrategy].should == 3600
+      result[AlwaysBetrayStrategy].should == 3216
+    end    
   end
   
   describe :evolve! do
