@@ -22,6 +22,18 @@ describe Competition do
       
       result.strategies.should have(2).strategies
     end
+    
+    [22, 31, 59, 101].each do |amount_of_strategy_instances|
+      it "plays well for #{amount_of_strategy_instances} strategy instances" do
+        strategies = (1..amount_of_strategy_instances).map{ AlwaysCooperateStrategy.new }
+        competition = Competition.new(strategies, 10)
+        result = competition.play!
+      
+        result.strategies.each do |strategy|
+          result.total(strategy).should == 30 * amount_of_strategy_instances
+        end
+      end
+    end
   end
 end
 

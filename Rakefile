@@ -36,3 +36,13 @@ task :competition do
   File.open("#{result_dir}/competition_result.csv", "w"){|f| f.write(result.to_s)}
   puts "Check #{result_dir} directory for detailed report."
 end
+
+task :profile_natual_selection do
+  competitors = [AlwaysCooperateStrategy, AlwaysBetrayStrategy, TitForTatStrategy]
+  natual_selection = NatualSelection.new(competitors, 100)
+  # natual_selection = NatualSelection.new(competitors)
+  
+  puts "======= BEGIN AT #{Time.now} ========"
+  natual_selection.play!
+  puts "======= FINISH AT #{Time.now} ========"
+end
