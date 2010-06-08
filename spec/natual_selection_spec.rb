@@ -28,11 +28,19 @@ describe NatualSelection do
   end
   
   describe :evolve! do
-    it "decides percentage of next generation based on scores of current generation"
-  #     natual_selection = NatualSelection.new(AlwaysCooperateStrategy.new, AlwaysBetrayStrategy.new, TitForTatStrategy.new)
-  #     natual_selection.instance_variable_get(:competition).should_receive(:play!).and_return
-  #     
-  #     natual_selection.evolve!
-  #   end
+    it "decides percentage of next generation based on scores of current generation" do
+      @natual_selection.should_receive(:play!).and_return(
+        {AlwaysCooperateStrategy => 1, AlwaysBetrayStrategy => 2, TitForTatStrategy => 3, NeverForgive => 2})
+      
+      @natual_selection.evolve!
+      
+      current_strategies = @natual_selection.instance_variable_get("@strategies")
+      current_strategies.select{|strategy| strategy.class == AlwaysCooperateStrategy}.should have(1).strategy
+      current_strategies.select{|strategy| strategy.class == AlwaysBetrayStrategy}.should have(2).strategies
+      current_strategies.select{|strategy| strategy.class == TitForTatStrategy}.should have(3).strategies
+      current_strategies.select{|strategy| strategy.class == NeverForgive}.should have(2).strategies
+      
+      # puts @natual_selection.to_s
+    end
   end
 end

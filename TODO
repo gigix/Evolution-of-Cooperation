@@ -3,6 +3,7 @@ Competition: play iterated dilemmas around multiple strategies and accumulate sc
 Load strategies from "strategies" subdirs
 Create a rake task to play competition
 Publish competition result as CSV file
+Simulate natural selection
 
 
 
@@ -10,7 +11,7 @@ Publish competition result as CSV file
 
 
 ========= TODO =========
-(Simulate natural selection)
+Strategies with genetic algorithm
 Detailed report about all actions taken in an iterated dilemma by both prisoners
 
 (Simulate group invading)
